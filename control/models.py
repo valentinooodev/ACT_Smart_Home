@@ -13,29 +13,24 @@ class RoomModel(models.Model):
         verbose_name_plural = 'Rooms'
 
 
-class InputDeviceModel(models.Model):
+class DeviceModel(models.Model):
+    choices = (
+        ('lamp', 'Lamp'),
+        ('fan', 'Fan'),
+        ('humidity', 'Humidity'),
+        ('temperature', 'Temperature'),
+    )
     name = models.CharField(max_length=255)
-    status = models.BooleanField(default=False)
-    data = models.CharField(max_length=255)
-    room = models.ForeignKey(RoomModel, on_delete=models.CASCADE, related_name='input_device_model')
+    status = models.BooleanField(default=False, null=True)
+    type = models.CharField(max_length=15, choices=choices)
+    data = models.CharField(max_length=255, null=True)
+    info = models.TextField()
+    room = models.ForeignKey(RoomModel, on_delete=models.CASCADE, related_name='device_model')
 
     def __str__(self):
         return self.name
 
     class Meta:
-        db_table = 'input_device'
-        verbose_name_plural = 'Input Devices'
-
-
-class OutputDeviceModel(models.Model):
-    name = models.CharField(max_length=255)
-    status = models.BooleanField(default=False)
-    room = models.ForeignKey(RoomModel, on_delete=models.CASCADE, related_name='output_device_model')
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        db_table = 'output_device'
-        verbose_name_plural = 'Output Devices'
+        db_table = 'devices '
+        verbose_name_plural = 'Devices'
 

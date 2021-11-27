@@ -8,13 +8,8 @@ class RoomSerializer(serializers.ModelSerializer):
         model = RoomModel
 
 
-class InputDeviceSerializer(serializers.ModelSerializer):
+class DeviceSerializer(serializers.ModelSerializer):
     class Meta:
         fields = '__all__'
-        model = InputDeviceModel
+        model = DeviceModel
 
-
-class OutputDeviceSerializer(serializers.ModelSerializer):
-    class Meta:
-        fields = '__all__'
-        model = OutputDeviceModel
